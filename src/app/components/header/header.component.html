@@ -1,0 +1,31 @@
+<header>
+  <div>
+    <i
+      class="pi pi-prime"
+      style="color: var(--primary-color-text); font-size: 2rem"
+    ></i>
+  </div>
+
+  <nav>
+    <div class="navbar-links">
+      <a routerLink="/">Home</a>
+      <a routerLink="/memory/new">New Memory</a>
+      <a routerLink="/about">About</a>
+    </div>
+
+    <p-button
+      *ngIf="themeLight"
+      icon="pi pi-sun"
+      severity="warning"
+      [style]="{ width: '28px', height: '28px' }"
+      (click)="changeTheme('dark')"
+    ></p-button>
+    <p-button
+      *ngIf="!themeLight"
+      icon="pi pi-moon"
+      severity="warning"
+      [style]="{ width: '28px', height: '28px' }"
+      (click)="changeTheme('light')"
+    ></p-button>
+  </nav>
+</header>

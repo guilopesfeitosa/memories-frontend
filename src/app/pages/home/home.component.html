@@ -1,0 +1,47 @@
+<section>
+  <h1>Veja suas memórias</h1>
+  <div class="search-container">
+    <form>
+      <p-iconField iconPosition="right">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input
+          type="text"
+          pInputText
+          placeholder="Procure por uma memória..."
+          (input)="search($event)"
+        />
+      </p-iconField>
+    </form>
+  </div>
+
+  <div *ngIf="filtredMemories.length > 0; else noMemories" class="memories">
+    <p-card
+      header="{{ memory.title }}"
+      subheader="{{ memory.created_at }}"
+      routerLink="memory/{{ memory.id }}"
+      class="memory"
+      *ngFor="let memory of filtredMemories"
+    >
+      <ng-template pTemplate="header">
+        <img
+          alt="Imagem da memória: {{ memory.title }}"
+          src="{{ apiUrl }}/uploads/{{ memory.image }}"
+        />
+        <!-- <img
+          alt="Card"
+          src="https://primefaces.org/cdn/primeng/images/usercard.png"
+        /> -->
+      </ng-template>
+      <p>
+        {{ memory.description }}
+      </p>
+    </p-card>
+  </div>
+
+  <ng-template #noMemories>
+    <div class="no-memories">
+      <i class="pi pi-ban" style="font-size: 2.5rem"></i>
+      <h2>Nenhuma memória cadastrada...</h2>
+    </div>
+  </ng-template>
+</section>

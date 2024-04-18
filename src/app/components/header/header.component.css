@@ -1,0 +1,32 @@
+header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 24px 16px 24px;
+  background-color: var(--primary-color);
+  border-bottom: 1px solid var(--highlight-bg);
+}
+
+nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-links {
+  display: inline-flex;
+  padding-right: 16px;
+  gap: 24px;
+}
+
+.navbar-links a {
+  font-size: large;
+  font-weight: 500;
+  color: var(--primary-color-text);
+  transition: .2s;
+}
+
+.navbar-links a:hover {
+  color: var(--text-secondary-color);
+}

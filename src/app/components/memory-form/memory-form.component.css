@@ -1,0 +1,25 @@
+form {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: auto;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label-image {
+  color: #989898;
+  padding-left: 8px;
+}
+
+.validation-error {
+  color: #fb6060;
+  padding-left: 8px;
+}

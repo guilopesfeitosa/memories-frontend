@@ -1,0 +1,12 @@
+<div *ngIf="memory; else memoryNotFound">
+  <h1><span>Editar memória</span> {{ memory.title }}</h1>
+  <app-memory-form
+    [btnText]="btnText"
+    [memoryData]="memory"
+    (memoryFormEmitter)="editHandler($event)"
+  />
+</div>
+
+<ng-template #memoryNotFound>
+  <h1>Memória não encontrada</h1>
+</ng-template>

@@ -1,0 +1,127 @@
+<div class="container" *ngIf="memory">
+  <div class="memory-container">
+    <div class="header">
+      <h1>{{ memory.title }}</h1>
+      <div>
+        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+        <p-button
+          type="button"
+          icon="pi pi-ellipsis-v"
+          [text]="true"
+          [rounded]="true"
+          (click)="menu.toggle($event)"
+        ></p-button>
+      </div>
+    </div>
+    <img
+      alt="Imagem da memória: {{ memory.title }}"
+      src="https://primefaces.org/cdn/primeng/images/usercard.png"
+    />
+    <!-- src="{{ apiUrl }}/uploads/{{ memory.image }}" -->
+
+    <section class="date-memory">
+      <i class="pi pi-calendar" style="font-size: 1.4em"></i>
+      <h3>Publicado em:</h3>
+      <p>{{ memory.created_at }}</p>
+    </section>
+
+    <section class="description-memory">
+      <i class="pi pi-comment" style="font-size: 1.4em"></i>
+      <h3>Descrição:</h3>
+      <p>{{ memory.description }}</p>
+    </section>
+
+    <p-divider></p-divider>
+
+    <section class="comments">
+      <div class="header">
+        <i class="pi pi-comments" style="font-size: 1.4em"></i>
+        <h3>Comentários</h3>
+        <p>({{ memory.comments?.length }})</p>
+      </div>
+      <div *ngIf="memory.comments!.length > 0; else noComments">
+        <div *ngFor="let comment of memory.comments">
+          <p-fieldset>
+            <ng-template pTemplate="header">
+              <div class="comment-user">
+                <p-avatar
+                  image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                  shape="circle"
+                />
+                <span>{{ comment.username }}</span>
+              </div>
+            </ng-template>
+            <p style="margin: 8px; font-size: small">
+              {{ comment.text }}
+            </p>
+          </p-fieldset>
+        </div>
+      </div>
+      <ng-template #noComments>
+        <p style="font-size: small; color: var(--text-secondary-color)">
+          Nenhum comentário até o momento...
+        </p>
+      </ng-template>
+      <form
+        [formGroup]="commentForm"
+        #formDir="ngForm"
+        (ngSubmit)="addComment(formDir)"
+      >
+        <h4>Deixe o seu comentário:</h4>
+        <div class="form-group">
+          <p-floatLabel>
+            <textarea
+              pInputTextarea
+              rows="5"
+              cols="30"
+              id="text"
+              formControlName="text"
+              placeholder="Insira seu comentário"
+              [style]="{ width: '100%' }"
+            ></textarea>
+            <label for="text">Comentário</label>
+          </p-floatLabel>
+          <div
+            *ngIf="text.invalid && formDir.submitted"
+            class="validation-error"
+          >
+            <small *ngIf="text.errors?.['required']">
+              Insira algum comentário.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p-floatLabel>
+            <input
+              pInputText
+              id="username"
+              type="text"
+              placeholder="Insira seu nome"
+              formControlName="username"
+              [style]="{ width: '100%' }"
+            />
+            <label for="username">Nome</label>
+          </p-floatLabel>
+          <div
+            *ngIf="username.invalid && formDir.submitted"
+            class="validation-error"
+          >
+            <small *ngIf="username.errors?.['required']">
+              O nome de usuário é obrigatório
+            </small>
+          </div>
+        </div>
+
+        <p-button
+          type="submit"
+          severity="secondary"
+          label="Adicionar comentário"
+          [style]="{ width: '100%' }"
+        ></p-button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
