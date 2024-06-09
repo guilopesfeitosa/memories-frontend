@@ -42,6 +42,7 @@ export class MemoryFormComponent implements OnInit {
   @Input() btnText!: string;
   @Input() memoryData: Memory | null = null;
   @ViewChild('fileUpload') fileUpload!: FileUpload;
+
   memoryForm!: FormGroup;
 
   get title() {
